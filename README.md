@@ -1,6 +1,26 @@
-Multimodal Real Estate Valuation Project
-This project develops a multimodal property valuation model that combines tabular housing attributes with satellite imagery to estimate real estate prices. Tabular data captures measurable property characteristics, while satellite images capture neighborhood quality such as greenery, density, accessibility, and nearby development. The model fuses both forms of information to improve the reliability of automated valuation systems.
-Repository structure
+# 🏠 Multimodal Real Estate Valuation Project
+
+This project develops a **multimodal property valuation model** that combines:
+
+- 🧮 **tabular housing attributes**
+- 🛰️ **satellite imagery**
+
+to estimate real estate prices.
+
+Tabular data captures measurable property characteristics, while satellite images capture **neighborhood quality** such as:
+
+- greenery
+- population density
+- accessibility
+- nearby development
+
+By **fusing both data types**, the model improves the reliability of automated real-estate valuation systems.
+
+---
+
+## 📂 Repository Structure
+
+```
 ├── notebook/
 │   ├── processed_data/
 │   ├── 24410015_final.csv
@@ -16,115 +36,132 @@ Repository structure
 ├── output.png
 ├── output_2.png
 └── requirements.txt
+```
 
-The file 24410015_final.csv is the primary dataset used in preprocessing and training.
+**Note:**  
+`24410015_final.csv` is the **primary dataset** used for preprocessing and model training.
 
-Installation and setup
-Clone the repository:
+---
+
+## 🛠 Installation and Setup
+
+### 1️⃣ Clone the repository
+
+```bash
 git clone https://github.com/Lakshya44444/CDC_DATASCIENCE_OPEN_PROJECT.git
 cd CDC_DATASCIENCE_OPEN_PROJECT
+```
 
-Install dependencies (Python 3.8 or higher recommended):
+### 2️⃣ Install dependencies
+
+> Python **3.8+ recommended**
+
+```bash
 pip install -r requirements.txt
+```
 
-Create a .env file in the project root and add your Mapbox API key:
+### 3️⃣ Add your Mapbox API key
+
+Create a `.env` file in the project root:
+
+```
 MAPBOX_ACCESS_TOKEN=your_token_here
+```
 
-This is required for data_fetcher.py.
+This is required by `data_fetcher.py` for downloading satellite imagery.
 
-Usage1. Data collection
+---
 
-To download satellite imagery:
+## ▶️ Usage
+
+### ✅ 1. Data Collection (Satellite Images)
+
+```bash
 python data_fetcher.py
+```
 
-The script supports automatic logging and rate limiting through mapbox_usage_log.json.
-2. Data preprocessing
-Open and run:
+Features:
+
+- automatic logging  
+- rate limiting  
+- usage tracked in `mapbox_usage_log.json`
+
+---
+
+### ✅ 2. Data Preprocessing
+
+Open in Jupyter:
+
+```
 notebook/preprocessing.ipynb
+```
 
 This notebook performs:
 
+- dataset cleaning  
+- feature engineering  
+- scaling and transformations  
+- saving processed files to `processed_data/`
 
-dataset cleaning
+---
 
+### ✅ 3. Model Training
 
-feature engineering
-
-
-scaling and transformations
-
-
-saving processed files to processed_data
-
-
-
-
-          
-            
-          
-        
-  
-        
-    
-
-3. Model training
 Open:
+
+```
 notebook/model_training.ipynb
+```
 
-This notebook includes:
+Includes:
 
+- multimodal network architecture  
+- stage-1: frozen backbone training  
+- stage-2: ResNet fine-tuning  
+- evaluation and visualization  
 
-multimodal model definition
+👉 Pretrained models already included:
 
+- `best_multimodal_model.pth`
+- `best_multimodal_model_finetuned.pth`
 
-stage-1 frozen backbone training
+So **retraining is optional**.
 
+---
 
-stage-2 fine-tuning of ResNet layers
+## 📊 Results
 
+The model was benchmarked against a **tabular-only baseline**.
 
-evaluation and visualization
+| Model | R² Score | Notes |
+|------|---------|-------|
+| XGBoost (tabular only) | 0.898 | high accuracy on structured features |
+| Multimodal network | 0.884 | incorporates visual neighborhood context |
 
+### Key insights learned from imagery
 
-Pretrained model files are already included, so training is optional.
+- 🌳 greener surroundings → **higher prices**
+- 🏭 dense concrete regions → **lower prices**
+- 🛣️ accessibility and open areas → **increase valuation**
 
-Results
-The model was benchmarked against a strong tabular baseline.
-ModelR² ScoreNotesXGBoost (tabular only)0.898high accuracy on structured featuresMultimodal network0.884incorporates visual neighborhood context
-Important observations learned from images:
+---
 
+## 🧰 Tech Stack
 
-greenery correlates with higher prices
+- Python  
+- PyTorch  
+- scikit-learn  
+- XGBoost  
+- pandas & numpy  
+- Mapbox Static Image API  
 
+---
 
-dense concrete regions correlate with lower prices
+## 📜 License
 
+This work is part of the **CDC Data Science Open Project**  
+and is intended for **educational and research use**.
 
-open surroundings and accessibility influence valuations
+---
 
-
-
-Tech stack
-
-
-Python
-
-
-PyTorch
-
-
-scikit-learn
-
-
-XGBoost
-
-
-pandas and numpy
-
-
-Mapbox Static Image API
-
-
-
-License
-This work is part of the CDC Data Science Open Project and is intended for educational and research use.
+⭐ If you find this project useful, feel free to star the repository!

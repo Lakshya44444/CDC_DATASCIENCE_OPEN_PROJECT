@@ -33,13 +33,15 @@ By **fusing both data types**, the model improves the reliability of automated r
 ├── data_fetcher_2.py
 ├── main.py
 ├── mapbox_usage_log.json
+├── 24410015_report.pdf
 ├── output.png
 ├── output_2.png
 └── requirements.txt
+
 ```
 
 **Note:**  
-`24410015_final.csv` is the **primary dataset** used for preprocessing and model training.
+`24410015_final.csv` is the submission.csv.
 
 ---
 

@@ -1,9 +1,9 @@
-# 🏠 Multimodal Real Estate Valuation Project
+#  Multimodal Real Estate Valuation Project
 
 This project develops a **multimodal property valuation model** that combines:
 
-- 🧮 **tabular housing attributes**
-- 🛰️ **satellite imagery**
+-  **tabular housing attributes**
+-  **satellite imagery**
 
 to estimate real estate prices.
 
@@ -18,7 +18,7 @@ By **fusing both data types**, the model improves the reliability of automated r
 
 ---
 
-## 📂 Repository Structure
+##  Repository Structure
 
 ```
 ├── notebook/
@@ -47,14 +47,14 @@ By **fusing both data types**, the model improves the reliability of automated r
 
 ## 🛠 Installation and Setup
 
-### 1️⃣ Clone the repository
+### 1️. Clone the repository
 
 ```bash
 git clone https://github.com/Lakshya44444/CDC_DATASCIENCE_OPEN_PROJECT.git
 cd CDC_DATASCIENCE_OPEN_PROJECT
 ```
 
-### 2️⃣ Install dependencies
+### 2️ Install dependencies
 
 > Python **3.8+ recommended**
 
@@ -62,7 +62,7 @@ cd CDC_DATASCIENCE_OPEN_PROJECT
 pip install -r requirements.txt
 ```
 
-### 3️⃣ Add your Mapbox API key
+### 3️ Add your Mapbox API key
 
 Create a `.env` file in the project root:
 
@@ -74,9 +74,9 @@ This is required by `data_fetcher.py` for downloading satellite imagery.
 
 ---
 
-## ▶️ Usage
+##  Usage
 
-### ✅ 1. Data Collection (Satellite Images)
+###  1. Data Collection (Satellite Images)
 
 ```bash
 python data_fetcher.py
@@ -90,7 +90,7 @@ Features:
 
 ---
 
-### ✅ 2. Data Preprocessing
+###  2. Data Preprocessing
 
 Open in Jupyter:
 
@@ -107,7 +107,7 @@ This notebook performs:
 
 ---
 
-### ✅ 3. Model Training
+###  3. Model Training
 
 Open:
 
@@ -122,7 +122,7 @@ Includes:
 - stage-2: ResNet fine-tuning  
 - evaluation and visualization  
 
-👉 Pretrained models already included:
+ Pretrained models already included:
 
 - `best_multimodal_model.pth`
 - `best_multimodal_model_finetuned.pth`
@@ -131,7 +131,7 @@ So **retraining is optional**.
 
 ---
 
-## 📊 Results
+##  Results
 
 The model was benchmarked against a **tabular-only baseline**.
 
@@ -142,13 +142,12 @@ The model was benchmarked against a **tabular-only baseline**.
 
 ### Key insights learned from imagery
 
-- 🌳 greener surroundings → **higher prices**
-- 🏭 dense concrete regions → **lower prices**
-- 🛣️ accessibility and open areas → **increase valuation**
-
+-  greener surroundings → **higher prices**
+-  dense concrete regions → **lower prices**
+-  accessibility and open areas → **increase valuation**
 ---
 
-## 🧰 Tech Stack
+##  Tech Stack
 
 - Python  
 - PyTorch  
@@ -159,11 +158,11 @@ The model was benchmarked against a **tabular-only baseline**.
 
 ---
 
-## 📜 License
+##  License
 
 This work is part of the **CDC Data Science Open Project**  
 and is intended for **educational and research use**.
 
 ---
 
-⭐ If you find this project useful, feel free to star the repository!
+ If you find this project useful, feel free to star the repository!

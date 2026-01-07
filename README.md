@@ -1,144 +1,130 @@
-🏡 Multimodal AI for Real Estate Valuation
+Multimodal Real Estate Valuation Project
+This project develops a multimodal property valuation model that combines tabular housing attributes with satellite imagery to estimate real estate prices. Tabular data captures measurable property characteristics, while satellite images capture neighborhood quality such as greenery, density, accessibility, and nearby development. The model fuses both forms of information to improve the reliability of automated valuation systems.
+Repository structure
+├── notebook/
+│   ├── processed_data/
+│   ├── 24410015_final.csv
+│   ├── best_multimodal_model.pth
+│   ├── best_multimodal_model_finetuned.pth
+│   ├── preprocessing.ipynb
+│   └── model_training.ipynb
+│
+├── data_fetcher.py
+├── data_fetcher_2.py
+├── main.py
+├── mapbox_usage_log.json
+├── output.png
+├── output_2.png
+└── requirements.txt
 
-Bridging the "Condition Gap" by fusing satellite imagery with financial data to predict property prices.
+The file 24410015_final.csv is the primary dataset used in preprocessing and training.
 
-(Above: Grad-CAM visualization showing the model identifying high-value features like greenery vs. low-value density.)
+Installation and setup
+Clone the repository:
+git clone https://github.com/Lakshya44444/CDC_DATASCIENCE_OPEN_PROJECT.git
+cd CDC_DATASCIENCE_OPEN_PROJECT
 
-📖 Overview
+Install dependencies (Python 3.8 or higher recommended):
+pip install -r requirements.txt
 
-Real estate valuation typically relies on tabular data (square footage, bedrooms, year built). However, this ignores the visual context—curb appeal, privacy, and neighborhood density—that heavily influences market value.
+Create a .env file in the project root and add your Mapbox API key:
+MAPBOX_ACCESS_TOKEN=your_token_here
 
-This project implements a Two-Stream Late Fusion Neural Network that processes:
+This is required for data_fetcher.py.
 
-Structured Data: 26 engineered financial features (e.g., Wealth Maps, Cyclical Time).
+Usage1. Data collection
 
-Unstructured Data: High-resolution RGB satellite imagery ($224 \times 224$ pixels).
+To download satellite imagery:
+python data_fetcher.py
 
-The result is a robust valuation model ($R^2 \approx 0.88$) that not only predicts price but visually explains its decisions using Gradient-weighted Class Activation Mapping (Grad-CAM).
+The script supports automatic logging and rate limiting through mapbox_usage_log.json.
+2. Data preprocessing
+Open and run:
+notebook/preprocessing.ipynb
 
-🚀 Key Features
-
-Multimodal Architecture: Combines a ResNet18 CNN (Visual Stream) with a deep Multi-Layer Perceptron (Tabular Stream).
-
-Late Fusion: Modalities are processed independently and fused at the penultimate layer for optimal weight balancing.
-
-Advanced Feature Engineering: * Spatial: K-Means Micro-Clustering & Target-Encoded Zip Wealth.
-
-Temporal: Cyclical Sine/Cosine encoding for seasonality ("The Spring Rush").
-
-Interaction: Polynomial features capturing Quality $\times$ Size dynamics.
-
-Explainable AI (XAI): Integrated SHAP for tabular feature importance and Grad-CAM for visual attention mapping.
-
-Automated Pipeline: Scripts for programmatic image acquisition (Mapbox API), outlier removal, and log-normal target transformation.
-
-📊 Performance Results
-
-We benchmarked the Multimodal Network against a state-of-the-art XGBoost ensemble.
-
-Model Architecture
-
-Features Used
-
-RMSE (Log)
-
-$R^2$ Score
-
-XGBoost (Baseline)
-
-26 Tabular Features
-
-0.165
-
-0.9015
-
-Multimodal NN (Fusion)
-
-Tabular + Satellite
-
-0.171
-
-0.8835
-
-Insight: While the tabular data is the dominant predictor ($90\%$ of variance), the Neural Network successfully integrated the visual signal. The Grad-CAM analysis confirmed the model learned to associate tree canopies and privacy with wealth and impervious surfaces (concrete) with lower value, providing interpretability that XGBoost lacks.
-
-🛠️ Project Structure
-
-├── 📁 processed_data/       # Cleaned CSVs and Scaler artifacts
-│   ├── train_final.csv
-│   ├── test_final.csv
-│   └── scaler.pkl
-├── 📁 images_mapbox_zoom18/ # Satellite imagery folder
-├── 📁 report_images/        # EDA & Result visualizations
-├── 📄 preprocessing.ipynb   # Data cleaning, Feature Eng., & EDA
-├── 📄 training.ipynb        # Model training loop (PyTorch)
-├── 📄 inference.py          # Generates submission_final.csv
-├── 📄 gradcam.py            # Generates Explainability Heatmaps
-├── 📄 ma.py                 # Mapbox Image Downloader Script
-└── 📄 README.md             # Project Documentation
+This notebook performs:
 
 
-💻 Installation & Usage
-
-1. Prerequisites
-
-Python 3.8+
-
-PyTorch (CUDA recommended for training)
-
-Mapbox API Key (for image downloading)
-
-2. Setup Environment
-
-# Clone repository
-git clone [https://github.com/yourusername/multimodal-real-estate.git](https://github.com/yourusername/multimodal-real-estate.git)
-cd multimodal-real-estate
-
-# Install dependencies
-pip install pandas numpy scikit-learn matplotlib seaborn torch torchvision tqdm pillow python-dotenv shap opencv-python
+dataset cleaning
 
 
-3. Run the Pipeline
-
-Step A: Download Images
-Create a .env file with MAPBOX_TOKEN=your_token_here and run:
-
-python ma.py
+feature engineering
 
 
-Step B: Preprocessing
-Run preprocessing.ipynb to clean data, engineer features, and generate train_final.csv.
-
-Step C: Train Model
-Run training.ipynb. This will save the best weights to best_multimodal_model_finetuned.pth.
-
-Step D: Inference & Submission
-
-python inference.py
+scaling and transformations
 
 
-Output: submission_final.csv
+saving processed files to processed_data
 
-📈 Visual Insights (EDA)
 
-1. The "Spring Rush" (Seasonality):
-Sales volume peaks significantly between April and August.
 
-2. Geospatial Wealth Distribution:
-Clustering analysis reveals distinct high-value pockets (Red) vs. industrial zones (Blue).
 
-🧠 Model Interpretability
+          
+            
+          
+        
+  
+        
+    
 
-SHAP Analysis (Tabular):
-The model identified zip_wealth (Location) and grade (Quality) as the top two drivers of price, confirming real estate domain knowledge.
+3. Model training
+Open:
+notebook/model_training.ipynb
 
-Grad-CAM (Visual):
-The model's visual attention (Red Hotspots) correlates strongly with private structures and greenery.
+This notebook includes:
 
-📜 License
 
-This project is licensed under the MIT License.
+multimodal model definition
 
-Author: Lakshya Gupta
 
-Date: January 7, 2026
+stage-1 frozen backbone training
+
+
+stage-2 fine-tuning of ResNet layers
+
+
+evaluation and visualization
+
+
+Pretrained model files are already included, so training is optional.
+
+Results
+The model was benchmarked against a strong tabular baseline.
+ModelR² ScoreNotesXGBoost (tabular only)0.898high accuracy on structured featuresMultimodal network0.884incorporates visual neighborhood context
+Important observations learned from images:
+
+
+greenery correlates with higher prices
+
+
+dense concrete regions correlate with lower prices
+
+
+open surroundings and accessibility influence valuations
+
+
+
+Tech stack
+
+
+Python
+
+
+PyTorch
+
+
+scikit-learn
+
+
+XGBoost
+
+
+pandas and numpy
+
+
+Mapbox Static Image API
+
+
+
+License
+This work is part of the CDC Data Science Open Project and is intended for educational and research use.
